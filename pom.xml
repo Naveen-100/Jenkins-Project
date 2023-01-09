@@ -38,6 +38,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+<!--				<configuration>-->
+<!--					<image>-->
+<!--						<name>docker.io/naveen2809/${project.artifactId}:latest</name>-->
+<!--					</image>-->
+<!--				</configuration>-->
 			</plugin>
 			<plugin>
 				<groupId>com.google.cloud.tools</groupId>
