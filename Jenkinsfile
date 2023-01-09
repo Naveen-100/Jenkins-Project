@@ -3,8 +3,7 @@ pipeline {
     stages {
         stage('poll scm') {
             steps {
-                eho 'HIII'
-                //git credentialsId: 'jenkins-proj', url: 'git@github.com:Naveen-100/Jenkins-Project.git'
+                git credentialsId: 'jenkins-proj', url: 'git@github.com:Naveen-100/Jenkins-Project.git'
             }
         }
         stage('mvn build') {
