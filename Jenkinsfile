@@ -52,7 +52,14 @@ pipeline {
         }
         stage('nexus'){
             steps{
-                nexusArtifactUploader artifacts: [[artifactId: 'jenkins-project', classifier: '', file: 'target/jenkins-project-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexus-proj', groupId: 'jenkins-project', nexusUrl: '20.172.157.172:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '0.0.1-SNAPSHOT'
+                script {
+                            pom = readMavenPom file: "pom.xml";
+                            filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
+                            echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+                            artifactPath = filesByGlob[0].path;
+                        }
+                //nexusArtifactUploader artifacts: [[artifactId: 'jenkins-project', classifier: '', file: 'target/jenkins-project-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexus-proj', groupId: 'jenkins-project', nexusUrl: '20.172.157.172:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '0.0.1-SNAPSHOT'
+                nexusArtifactUploader artifacts: [[artifactId: pom.artifactId, classifier: '', file: artifactPath, type: pom.packaging, type: 'jar']], credentialsId: 'nexus-proj', groupId: pom.artifactId, nexusUrl: '20.172.157.172:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: pom.version
             }
         }
     }
