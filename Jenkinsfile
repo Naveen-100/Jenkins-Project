@@ -13,12 +13,41 @@ pipeline {
         }
         stage('mvn test') {
             when {
-               expression {stage == 'unittest'}
-             }
-
+                expression {stage == 'unittest'}
+            }
             steps {
                 sh 'mvn test'
                 junit 'target/surefire-reports/*.xml'
+            }
+        }
+        stage('checkstyle') {
+            when {
+                expression {stage == 'checkstyle'}
+            }
+            steps {
+                sh 'mvn checkstyle:checkstyle'
+                recordIssues(tools: [checkStyle(pattern: '**/checkstyle-result.xml')])
+
+            }
+        }
+        stage('code coverage') {
+            when {
+                expression {stage == 'codecoverage'}
+            }
+            steps {
+                jacoco()
+
+            }
+        }
+        stage('sonar') {
+            when {
+                expression {stage == 'sonar'}
+            }
+            steps {
+                sh 'mvn clean verify sonar:sonar \
+                -Dsonar.projectKey=jenkins-project \
+                -Dsonar.host.url=http://20.124.114.95:9000 \
+                -Dsonar.login=sqp_4097849648ebd7e72f397348ffd4e0da23d6e253'
             }
         }
     }
