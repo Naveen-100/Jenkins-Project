@@ -50,5 +50,10 @@ pipeline {
                     -Dsonar.login=sqp_d20d9122f841fbaf3b1831ce5231496954b1db1d'
             }
         }
+        stage('nexus'){
+            steps{
+                nexusArtifactUploader artifacts: [[artifactId: 'jenkins-project', classifier: '', file: 'target/jenkins-project-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexus-proj', groupId: 'jenkins-project', nexusUrl: '20.172.157.172:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '0.0.1-SNAPSHOT'
+            }
+        }
     }
 }
