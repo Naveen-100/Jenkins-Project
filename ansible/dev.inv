@@ -1,0 +1,2 @@
+[client]
+client ansible_host=20.121.37.215 ansible_user=root
