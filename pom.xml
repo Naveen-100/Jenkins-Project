@@ -11,7 +11,7 @@
 	<groupId>com.sapient.asde</groupId>
 	<artifactId>jenkins-project</artifactId>
 	<version>V1</version>
-	<packaging>war</packaging>
+	<!-- <packaging>war</packaging> -->
 	<name>jenkins-project</name>
 	<description>Demo project for Jenkins Project</description>
 	<properties>
