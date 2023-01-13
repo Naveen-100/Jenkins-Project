@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.sapient.asde</groupId>
 	<artifactId>jenkins-project</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>V1</version>
 	<packaging>war</packaging>
 	<name>jenkins-project</name>
 	<description>Demo project for Jenkins Project</description>
@@ -52,7 +52,7 @@
 				<configuration>
 					<to>
 <!--						<image>registry.hub.docker.com/naveen2809/${project.artifactId}:v1</image>-->
-						<image>20.172.157.172:8085/dockerapp</image>
+						<image>20.163.228.142:8085/nexus-pvt</image>
 					</to>
 				</configuration>
 			</plugin>
